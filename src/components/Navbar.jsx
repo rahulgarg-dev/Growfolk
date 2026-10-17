@@ -5,10 +5,9 @@ import Logo from './Logo.jsx';
 import { NAV } from '../config.js';
 
 const linkCls = ({ isActive }) =>
-  `rounded-xl px-3.5 py-2 text-sm font-medium transition-all duration-200 ${
-    isActive
-      ? 'bg-white/[0.08] text-white font-semibold'
-      : 'text-muted hover:text-ink hover:bg-white/[0.04]'
+  `rounded-xl px-3.5 py-2 text-sm font-medium transition-all duration-200 ${isActive
+    ? 'bg-white/[0.08] text-white font-semibold'
+    : 'text-muted hover:text-ink hover:bg-white/[0.04]'
   }`;
 
 export default function Navbar() {
@@ -35,11 +34,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || open
           ? 'glass-nav shadow-md py-3'
           : 'bg-transparent py-4'
-      }`}
+        }`}
     >
       <div className="container-x flex items-center justify-between">
         <div className="flex items-center gap-3">

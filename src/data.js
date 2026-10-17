@@ -1,18 +1,30 @@
 import { Globe, Code2, Wrench, ShieldCheck, BarChart3, Settings, Store, Rocket, Briefcase, Users } from 'lucide-react';
 
 export const SERVICES = [
-  { icon: Globe, title: 'Website Development', lead: 'Create a credible, modern online presence.',
-    points: ['Business websites and landing pages', 'Portfolio, service and e-commerce websites', 'Responsive UI and website redesign', 'Contact forms, WhatsApp and booking journeys'] },
-  { icon: Code2, title: 'Software & Web Apps', lead: 'Build tools around your business workflow.',
-    points: ['Custom web applications and dashboards', 'Admin and management systems', 'Booking, inventory and CRM-style tools', 'APIs and third-party integrations'] },
-  { icon: Wrench, title: 'Bug Fixing & Troubleshooting', lead: 'Identify issues and fix the agreed problem.',
-    points: ['Frontend and backend debugging', 'API, database and integration issues', 'Responsive layout and UI fixes', 'Existing project improvements'] },
-  { icon: ShieldCheck, title: 'Testing & Quality Assurance', lead: 'Check that agreed features work as expected.',
-    points: ['Functional and regression testing', 'Cross-browser and responsive checks', 'Forms and user-flow testing', 'Bug reports and agreed retesting'] },
-  { icon: BarChart3, title: 'SEO & Performance', lead: 'Strengthen technical and search foundations.',
-    points: ['Basic on-page SEO setup', 'Local SEO and profile assistance', 'Page speed and performance improvements', 'Indexing and agreed technical checks'] },
-  { icon: Settings, title: 'Maintenance & Support', lead: 'Keep your product updated after launch.',
-    points: ['Content and feature updates', 'Backup and security configuration', 'Ongoing fixes and technical support', 'Maintenance under an agreed scope'] },
+  {
+    icon: Globe, title: 'Website Development', lead: 'Create a credible, modern online presence.',
+    points: ['Business websites and landing pages', 'Portfolio, service and e-commerce websites', 'Responsive UI and website redesign', 'Contact forms, WhatsApp and booking journeys']
+  },
+  {
+    icon: Code2, title: 'Software & Web Apps', lead: 'Build tools around your business workflow.',
+    points: ['Custom web applications and dashboards', 'Admin and management systems', 'Booking, inventory and CRM-style tools', 'APIs and third-party integrations']
+  },
+  {
+    icon: Wrench, title: 'Bug Fixing & Troubleshooting', lead: 'Identify issues and fix the agreed problem.',
+    points: ['Frontend and backend debugging', 'API, database and integration issues', 'Responsive layout and UI fixes', 'Existing project improvements']
+  },
+  {
+    icon: ShieldCheck, title: 'Testing & Quality Assurance', lead: 'Check that agreed features work as expected.',
+    points: ['Functional and regression testing', 'Cross-browser and responsive checks', 'Forms and user-flow testing', 'Bug reports and agreed retesting']
+  },
+  {
+    icon: BarChart3, title: 'SEO & Performance', lead: 'Strengthen technical and search foundations.',
+    points: ['Basic on-page SEO setup', 'Local SEO and profile assistance', 'Page speed and performance improvements', 'Indexing and agreed technical checks']
+  },
+  {
+    icon: Settings, title: 'Maintenance & Support', lead: 'Keep your product updated after launch.',
+    points: ['Content and feature updates', 'Backup and security configuration', 'Ongoing fixes and technical support', 'Maintenance under an agreed scope']
+  },
 ];
 
 export const STEPS = [

@@ -88,7 +88,9 @@ async function sendEnquiry(v) {
       if (postdropId.startsWith('http')) {
         url = postdropId;
       } else {
-        url = 'https://postdrop.onrender.com/api/entries/submit';
+        url = import.meta.env.DEV
+          ? '/api/postdrop'
+          : 'https://postdrop.onrender.com/api/entries/submit';
         headers.Authorization = `Bearer ${postdropId}`;
       }
     } else if (url && postdropId && !headers.Authorization) {
@@ -103,7 +105,10 @@ async function sendEnquiry(v) {
     });
 
     const data = await res.json().catch(() => ({}));
-    const message = data.message || data.error || '';
+    let message = data.message || data.error || '';
+    if (res.status === 401 && message.toLowerCase().includes('unauthorized domain')) {
+      message = 'Domain not authorized in PostDrop. Please whitelist this domain in your PostDrop dashboard.';
+    }
     const ok = res.ok && String(data.success) !== 'false';
 
     return {
