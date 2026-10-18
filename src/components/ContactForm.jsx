@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { submitForm } from 'postdrop';
 import {
   AlertCircle,
   CheckCircle2,
@@ -58,70 +59,35 @@ async function sendEnquiry(v) {
   };
   if (v.email.trim()) payload.email = v.email.trim();
 
-  const postdropId = (SITE.postdropId || '').trim();
-  const endpoint = (SITE.formEndpoint || '').trim();
+  const publicKey = (SITE.postdropId || '').trim();
 
-  // If no PostDrop ID or endpoint is configured yet (e.g. initial setup / local dev)
-  if (!postdropId && !endpoint) {
+  // If no PostDrop ID is configured yet (e.g. initial setup / local dev)
+  if (!publicKey) {
     console.info(
-      '[PostDrop] No VITE_POSTDROP_ID or VITE_FORM_ENDPOINT configured yet. Simulating smooth submission in demo mode. Configure in .env or src/config.js to receive email notifications.'
+      '[PostDrop] VITE_POSTDROP_ID not configured. Simulating submission in demo mode. Add it in .env to receive real submissions.'
     );
-    // Smooth delay for authentic UX
     await new Promise((resolve) => setTimeout(resolve, 800));
-    return {
-      ok: true,
-      message: 'Enquiry submitted successfully.',
-    };
+    return { ok: true, message: 'Enquiry submitted successfully.' };
   }
 
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 12000);
+  const formData = new FormData();
+  Object.entries(payload).forEach(([k, val]) => formData.append(k, val));
 
   try {
-    let url = endpoint;
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-
-    if (!url && postdropId) {
-      if (postdropId.startsWith('http')) {
-        url = postdropId;
-      } else {
-        url = import.meta.env.DEV
-          ? '/api/postdrop'
-          : 'https://postdrop.onrender.com/api/entries/submit';
-        headers.Authorization = `Bearer ${postdropId}`;
-      }
-    } else if (url && postdropId && !headers.Authorization) {
-      headers.Authorization = `Bearer ${postdropId}`;
-    }
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
-      signal: ctrl.signal,
-    });
-
-    const data = await res.json().catch(() => ({}));
-    let message = data.message || data.error || '';
-    if (res.status === 401 && message.toLowerCase().includes('unauthorized domain')) {
-      message = 'Domain not authorized in PostDrop. Please whitelist this domain in your PostDrop dashboard.';
-    }
-    const ok = res.ok && String(data.success) !== 'false';
-
+    const res = await submitForm({ publicKey, formData });
+    const ok = !!res?.success;
     return {
       ok,
-      message: message || (ok ? 'Enquiry submitted successfully' : 'Could not submit enquiry'),
+      message:
+        res?.message ||
+        res?.error ||
+        (ok ? 'Enquiry submitted successfully' : 'Could not submit enquiry'),
     };
   } catch (err) {
-    if (err?.name === 'AbortError') {
-      return { ok: false, message: 'Submission request timed out. Please try again or chat with us directly.' };
-    }
-    return { ok: false, message: err?.message || 'Network error. Please try again or message on WhatsApp.' };
-  } finally {
-    clearTimeout(timer);
+    return {
+      ok: false,
+      message: err?.message || 'Network error. Please try again or message on WhatsApp.',
+    };
   }
 }
 

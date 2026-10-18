@@ -87,7 +87,7 @@ export default function Footer() {
       </div>
 
       <div className="container-x mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-xs text-muted sm:flex-row">
-        <p>© 2025 Growfolk. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Growfolk. All rights reserved.</p>
         <p className="text-muted/60">
           Engineered for performance &amp; precision
         </p>
