@@ -1,8 +1,7 @@
-   <?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <url><loc>https://www.growfolk.in/</loc></url>
-     <url><loc>https://www.growfolk.in/services</loc></url>
-     <url><loc>https://www.growfolk.in/about</loc></url>
-     <url><loc>https://www.growfolk.in/pricing</loc></url>
-     <url><loc>https://www.growfolk.in/contact</loc></url>
-   </urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.growfolk.in/</loc></url>
+  <url><loc>https://www.growfolk.in/services</loc></url>
+  <url><loc>https://www.growfolk.in/about</loc></url>
+  <url><loc>https://www.growfolk.in/pricing</loc></url>
+  <url><loc>https://www.growfolk.in/contact</loc></url>
+</urlset>
