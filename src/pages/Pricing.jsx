@@ -1,10 +1,54 @@
 import { useState } from 'react';
-import { ChevronDown, Info, ShieldCheck, Check, Sparkles } from 'lucide-react';
+import {
+  ChevronDown,
+  ShieldCheck,
+  Check,
+  Layers,
+  Palette,
+  Plug,
+  FileText,
+  RefreshCw,
+  Clock,
+} from 'lucide-react';
 import PageHeader from '../components/PageHeader.jsx';
 import Reveal from '../components/Reveal.jsx';
 import CTA from '../components/CTA.jsx';
 import usePageMeta from '../usePageMeta.js';
 import { BEFORE, CLARITY, FAQ } from '../data.js';
+
+// What drives the price of a project. Edit the wording to match how you actually quote.
+const PRICE_FACTORS = [
+  {
+    icon: Layers,
+    t: 'Scope and size',
+    d: 'A 5-page business website and a multi-role web app are very different projects. More pages, screens and features mean more design, build and testing time.',
+  },
+  {
+    icon: Palette,
+    t: 'Design approach',
+    d: 'A clean, template-based layout costs less than a fully custom design with its own brand look and feel.',
+  },
+  {
+    icon: Plug,
+    t: 'Integrations',
+    d: 'Payment gateways, WhatsApp, booking tools, CRMs and third-party APIs each need setup and testing, so they are listed as separate line items.',
+  },
+  {
+    icon: FileText,
+    t: 'Content readiness',
+    d: 'Ready logo, photos and text keep a project fast. If we need to help structure or write content, it is scoped and quoted on its own.',
+  },
+  {
+    icon: RefreshCw,
+    t: 'Revisions and timeline',
+    d: 'Agreed feedback rounds keep costs predictable. If you need a very tight deadline, we will say so in the quote.',
+  },
+  {
+    icon: Clock,
+    t: 'Support after launch',
+    d: 'Maintenance, updates and monitoring are quoted separately, so you only pay for the support you actually need.',
+  },
+];
 
 function FaqItem({ q, a, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -44,8 +88,8 @@ function FaqItem({ q, a, defaultOpen = false }) {
 
 export default function Pricing() {
   usePageMeta(
-    'Pricing',
-    'No rigid packages or hidden fees. Growfolk analyzes your requirements first, then provides a tailored written quotation before work begins.'
+    'Pricing: Fixed-Scope Quotes for Websites & Software',
+    'Growfolk uses fixed-scope written quotes for websites, custom software and web apps. See what affects your price and how our quotation process works.'
   );
 
   return (
@@ -84,6 +128,45 @@ export default function Pricing() {
               </Reveal>
             ))}
           </ol>
+
+          {/* What affects your quote */}
+          <Reveal className="mt-16">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand">How we quote</span>
+            <h2 className="h2 mt-2">What affects the price of your project</h2>
+            <p className="mt-2 max-w-2xl text-sm text-muted leading-relaxed">
+              Whether you need a business website, a custom web application or a fix for an existing product, your written quotation is built from the factors below. You see every line item before you commit.
+            </p>
+          </Reveal>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {PRICE_FACTORS.map(({ icon: Icon, t, d }, i) => (
+              <Reveal key={t} delay={i * 60}>
+                <div className="card h-full group hover:border-brand/40">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-brand">
+                    <Icon size={18} />
+                  </span>
+                  <h3 className="mt-4 font-display text-base font-bold text-white group-hover:text-brand transition-colors">
+                    {t}
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-muted leading-relaxed">{d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-6">
+            <p className="text-sm text-muted">
+              Not sure what you need yet? Browse our{' '}
+              <a href="/services" className="font-semibold text-brand hover:underline">
+                website and software services
+              </a>{' '}
+              or{' '}
+              <a href="/contact" className="font-semibold text-brand hover:underline">
+                tell us about your project
+              </a>{' '}
+              and we will help you define the scope.
+            </p>
+          </Reveal>
 
           {/* Project Clarity Banner */}
           <Reveal className="mt-12">
